@@ -14,21 +14,26 @@ object TrajectoryGen {
 
     private val combinedConstraints = MecanumConstraints(driveConstraints, trackWidth)
 
-    private val startPose = Pose2d(-48.0, -48.0, 90.0.toRadians)
+    //private val startPose = Pose2d(-48.0, -48.0, 90.0.toRadians)
 
-    fun createTrajectory(): ArrayList<Trajectory> {
+    fun createTrajectory(startPose: Pose2d, points: List<Pair<Vector2d, Double>>): ArrayList<Trajectory> {
         val list = ArrayList<Trajectory>()
 
-        val builder1 = TrajectoryBuilder(startPose, startPose.heading, combinedConstraints)
+        var currentPose = startPose
 
-        builder1.forward(40.0);
+        points.forEach {
+            if (it != points[0])
+                list.add(
+                    TrajectoryBuilder(currentPose, currentPose.heading, combinedConstraints)
+                        .splineTo(it.first, it.second).build()
+                )
+
+            currentPose = Pose2d(it.first.x, it.first.y, it.second)
+        }
 
         // Small Example Routine
-//        builder1
-//            .splineTo(Vector2d(10.0, 10.0), 0.0)
-//            .splineTo(Vector2d(15.0, 15.0), 90.0);
 
-        list.add(builder1.build())
+        //println(points)
 
         return list
     }
