@@ -93,7 +93,7 @@ class App : Application() {
         stage.title = "PathVisualizer"
         stage.isResizable = false
 
-        //println("duration $duration")
+        println("duration $duration")
 
         stage.show()
         t1.play()
@@ -263,10 +263,10 @@ class App : Application() {
                 enableRotations(currentArrow, index)
 
                 if (angle > PI ) {
-                    arrow.angle = - angle - PI / 2
+                    currentArrow.angle = - angle - PI / 2
                 }
                 else {
-                    arrow.angle = 1.5 * PI - angle
+                    currentArrow.angle = 1.5 * PI - angle
                 }
 
                 enableDrag(circle, currentArrow, index)
@@ -276,15 +276,6 @@ class App : Application() {
                 circle.scene.cursor = Cursor.HAND
             }
         circle.onMouseDragged = EventHandler { mouseEvent ->
-
-            //root.children.remove(arrow)
-
-            //arrow.isVisible = false
-
-            //root.children.remove(arrow)
-            //root.children.remove(currentArrow)
-
-            //root.children.remove(arrow)
 
             circle.centerX = mouseEvent.x + dragDelta.x
             circle.centerY = mouseEvent.y + dragDelta.y
