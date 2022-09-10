@@ -1,5 +1,5 @@
 # RRPathCreator
-Release v1.0: 
+Version v1.0: 
 
 Implemented the following functionalities: 
 - Click to add points to a trajectory
